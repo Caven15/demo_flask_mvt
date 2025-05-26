@@ -3,9 +3,32 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Index</title>
+	<title>{% block title %}Index{% endblock %}</title>
 </head>
 <body>
-	<h1>Hello world !!!</h1>
+	<nav>
+		<div class="dropdown">
+			<button> Authentification</button>
+			<div>
+				<a href="/auth/register">Inscription</a>
+				<a href="/auth/login">Connexion</a>
+			</div>
+			<div>
+				<a href="/auth/logout">Déconnexion</a>
+			</div>
+		</div>
+
+		<div>
+			<button>task (Démonstrations)</button>
+			<div>
+				<a href="/task/new">Nouvelle tache</a>
+			</div>
+		</div>
+
+		<div>
+			<a href="/demo/jinja">Démonstrations jinja</a>
+		</div>
+	</nav>
+	{% block content %}{% endblock %}
 </body>
 </html>
