@@ -3,8 +3,7 @@ from app import app
 
 @app.route('/')
 def index():
-    test_python = "Ma valeur test"
-    return render_template('index.html', test_html = test_python)
+    return render_template('index.html')
 
 @app.route('/demo/jinja')
 def demo_jinja():
@@ -17,3 +16,19 @@ def demo_jinja():
 	]
     utilisateur_python = "alex"
     return render_template('demo-jinja.html', jeux= jeux_python, utilisateur=utilisateur_python)
+
+@app.route('/exo/jinja')
+def exo_jinja():
+    utilisateurs = [
+		{"id": 1, "username": "jdoe", "email": "jdoe@example.com", "password": "****", "is_active":
+		True},
+		{"id": 2, "username": "asmith", "email": "asmith@example.com", "password": "****",
+		"is_active": False},
+		{"id": 3, "username": "clee", "email": "clee@example.com", "password": "****", "is_active":
+		True},
+		{"id": 4, "username": "mwhite", "email": "mwhite@example.com", "password": "****",
+		"is_active": False},
+		{"id": 5, "username": "nblack", "email": "nblack@example.com", "password": "****",
+		"is_active": True}
+	]
+    return render_template('admin-utilisateurs.html', utilisateurs = utilisateurs)
