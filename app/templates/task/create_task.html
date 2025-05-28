@@ -6,8 +6,15 @@
 {% block content %}
 
 <h1>ajouter tâche</h1>
-<form action="POST">
+<form method="post">
 	{{form.hidden_tag()}}
+	{% if form.description.errors %}
+		<ul>
+			{% for error in form.description.errors %}
+				<li>{{error}}</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
 	<p>{{form.description.label}} {{form.description()}}</p> 
 	<button type="submit">Valider</button>
 </form>

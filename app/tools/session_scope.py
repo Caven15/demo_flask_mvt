@@ -11,5 +11,3 @@ def session_scope():
         session.commit()
     except:
         session.rollback()
-    finally:
-        session.close()
