@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_wtf import CSRFProtect
+from flask_wtf.csrf import CSRFProtect
 from sqlalchemy import create_engine
 from app.config import SECRET_KEY, URL_DB
 from sqlalchemy.exc import SQLAlchemyError
@@ -42,7 +42,7 @@ except SQLAlchemyError as e :
 
 if db_connected:
     # Permet de supprimer / recréer la base de donnée
-    metadata.drop_all(bind=engine)
+    # metadata.drop_all(bind=engine)
     metadata.create_all(bind=engine)
     
     from app.routes import other, task

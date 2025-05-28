@@ -7,7 +7,6 @@ host_name = 'localhost'
 port = '5432'
 database_name = 'db_flask_demo'
 
-
 URL_DB = f"{scheme}://{username}:{password}@{host_name}:{port}/{database_name}"
 
 SQLALCHEMY_DATABASE_URI = URL_DB

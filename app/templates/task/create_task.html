@@ -1,0 +1,15 @@
+{% extends "index.html" %}
+
+{% block title %} Création d'une tâche {% endblock %}
+
+
+{% block content %}
+
+<h1>ajouter tâche</h1>
+<form action="POST">
+	{{form.hidden_tag()}}
+	<p>{{form.description.label}} {{form.description()}}</p> 
+	<button type="submit">Valider</button>
+</form>
+
+{% endblock %}
