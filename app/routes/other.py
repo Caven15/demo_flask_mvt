@@ -5,6 +5,10 @@ from app import app
 def index():
     return render_template('index.html')
 
+@app.route('/home')
+def home():
+    return render_template('home.html')
+
 @app.route('/demo/jinja')
 def demo_jinja():
     jeux_python = [
