@@ -36,3 +36,14 @@ def exo_jinja():
 		"is_active": True}
 	]
     return render_template('admin-utilisateurs.html', utilisateurs = utilisateurs)
+
+@app.route('/exo/espace-cinephile')
+def exo_espace_cinephile():
+	films = [
+	{"titre": "Inception", "genre": "Science-fiction", "note": 9.1, "vu": True, "duree": 148},
+	{"titre": "La La Land", "genre": "Comédie musicale", "note": 8.0, "vu": False, "duree": 128},
+	{"titre": "Parasite", "genre": "Thriller", "note": 8.6, "vu": True, "duree": 132},
+	{"titre": "Joker", "genre": "Drame", "note": 8.5, "vu": False, "duree": 122},
+	{"titre": "Spider-Man: No Way Home", "genre": "Action", "note": 8.3, "vu": True, "duree": 148}
+	]
+	return render_template('espace-cinephile.html', films = films)
