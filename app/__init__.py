@@ -1,11 +1,12 @@
 from flask import Flask
+from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
 from sqlalchemy import create_engine
 from app.config import SECRET_KEY, URL_DB
 from sqlalchemy.exc import SQLAlchemyError
 
-from app.models.db.db_model import Base
+from app.models.db.db_model import Base, User
 
 # Initialisation de l'application flask
 app = Flask(__name__)
@@ -13,9 +14,21 @@ app = Flask(__name__)
 # Mise ene place d'une session SQLalchemy
 app.config['SECRET_KEY'] = SECRET_KEY
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] =URL_DB
+app.config['SQLALCHEMY_DATABASE_URI'] = URL_DB
 
 # inistialisation de la sécurité...
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+login_manager.login_message = "Il faut ête connecté pour accéder à cette page !!"
+
+from app.tools.session_scope import session_scope
+from app.models.db.db_model import User
+
+@login_manager.user_loader
+def load_user(user_id):
+    with session_scope() as session:
+        return session.query(User).get(int(user_id))
 
 # Initialisation de CSRFProtect pour la protection contre les attaque CSRF
 csrf = CSRFProtect(app)
@@ -45,7 +58,7 @@ if db_connected:
     # metadata.drop_all(bind=engine)
     metadata.create_all(bind=engine)
     
-    from app.routes import other, task
+    from app.routes import other, task, auth, user
     
     print('------------------------')
     print('Connexion db établie ✅')
